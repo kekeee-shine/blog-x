@@ -2,9 +2,9 @@
   <main>
     <div class="markdown-body main-container">
       <div class="post-container float-left">
-        <article-html
+        <ArticleHtml
           article_url="https://blog-resource-1257103956.cos.ap-nanjing.myqcloud.com/html/222222.html"
-        ></article-html>
+        ></ArticleHtml>
       </div>
 
       <aside class="sidebar-container float-left hidden-sm">
@@ -34,9 +34,13 @@
 <script lang="ts">
 import { defineComponent, watch, ref } from "vue";
 import {articles, labels,topics} from "@/Global.ts";
+import ArticleHtml from "@/components/MainPage/article.vue";
+
 export default defineComponent({
   name: "MainPage",
-  components: {},
+  components: {
+    ArticleHtml
+  },
   mounted() {
     this.url1 =
       "https://blog-resource-1257103956.cos.ap-nanjing.myqcloud.com/html/222222.html";

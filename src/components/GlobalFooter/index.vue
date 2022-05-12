@@ -8,7 +8,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-// import { isMobile } from '@/utils/device'
 
 export default defineComponent({
   name: "GlobalFooter",
@@ -23,5 +22,9 @@ export default defineComponent({
   a {
     color: #888888;
   }
+
+.copyright{
+  text-align: center;
+}
 }
 </style>

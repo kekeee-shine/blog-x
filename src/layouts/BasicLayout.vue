@@ -7,7 +7,6 @@
       style="{ margin: '24px 24px 0', paddingTop: fixedHeader ? '40px' : '0' }"
     >
       <main-page />
-      {{ aaa }}
     </a-layout-content>
 
     <!-- layout footer -->
