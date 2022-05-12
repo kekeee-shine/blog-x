@@ -1,12 +1,17 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory,createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import BasicLayout from '../layouts/BasicLayout.vue'
 import GlobalHeader from '../components/GlobalHeader/index.vue'
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'home',
-    component: BasicLayout
+    component: BasicLayout,
+  //   children: [
+  //     {path: 'account1', component: account1},
+  //     {path: 'account2', component: account2},
+  // ]
   },
   {
     path: '/about',
@@ -17,14 +22,15 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
-    path: '/test',
-    name: 'test',
+    path: '/article/:id',
+    name: 'post',
     component: BasicLayout
+
   },
   {
-    path: '/header',
-    name: 'header',
-    component: GlobalHeader
+    path: '/archive',
+    name: 'archive',
+    component: BasicLayout
   }
 ]
 

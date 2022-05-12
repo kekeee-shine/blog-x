@@ -3,34 +3,54 @@
 </template>
 <style>
 </style>
-<script>
-import { onMounted, watch, ref,toRefs } from "vue";
-import axios from 'axios'
 
+<script>
+import { computed,onMounted, watch, ref, toRefs } from "vue";
+import axios from 'axios'
+import { useRouter } from 'vue-router'
+    const router = useRouter()
 export default {
   name: "ArticleHtml",
-    props: {
-    article_url: String
-  },
-  setup(props) {
-    var article_url = toRefs(props).article_url.value
-    const article_html = ref("");
-
+  setup() {
+    const router = useRouter()
+    // const article_name = computed(() => {
+    //   return props.article_name
+    // })
+    const article_name = computed(() => {
+      return router.currentRoute.value.params.id
+    })
+    const article_html = ref("")
+    // const router = useRouter()
+    const article_url = "https://blog-resource-1257103956.cos.ap-nanjing.myqcloud.com/html/" + article_name.value + ".html";
     onMounted(() => {
-      if (article_url && article_url.length > 0) {
+      if (article_name.value && article_name.value.length > 0) {
         axios.get(article_url)
-        .then(function (response) {
+          .then(function (response) {
             article_html.value = response.data;
-        })
-        .catch(function (error) {
+          })
+          .catch(function (error) {
             article_html.value = "加载失败";
-        });
+          });
       }
     });
+
+    // watch(article_name, (article_name) => {
+    //   if (article_name && article_name.length > 0) {
+    //     axios.get(article_url)
+    //       .then(function (response) {
+    //         article_html.value = response.data;
+    //       })
+    //       .catch(function (error) {
+    //         article_html.value = "加载失败";
+    //       });
+    //   }
+    // });
+
     return {
-      props,
       article_html,
     };
+
+
   }
 };
 </script>
