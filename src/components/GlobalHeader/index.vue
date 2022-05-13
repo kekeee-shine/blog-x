@@ -164,7 +164,7 @@ export default defineComponent({
   background-color: rgba(62, 71, 79, 0.8);
 }
 .header {
-  background: #48535c;
+  background: #223344;
   padding: 0px;
 
   a {

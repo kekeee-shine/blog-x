@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="markdown-body main-container">
-      <div class="post-container float-left">
+      <div class="post-container float-left box-shadow">
         <!-- <router-link to="/">Home</router-link> |
         <router-view /> -->
         <router-view :key="$route.fullPath"></router-view>
@@ -10,7 +10,7 @@
 
       <aside class="sidebar-container float-left hidden-sm">
         <div>
-          <section class="sidebar-section">
+          <section class="sidebar-section box-shadow">
             <!-- <a
               class="label-item"
               v-for="(label, index) in articles"
@@ -22,12 +22,10 @@
               >{{ label['name'] + (index % 5) }}</a
             > -->
 
-            <router-link class="label-item" v-for="(label, index) in articles" :to="'/article/' + label['name']"
-              :key="index" :style="{
-                'background-color': colors[index % 5],
-              }">{{ label['name'] + (index % 5) }}</router-link>
+            <router-link class="label-item " v-for="(value, index) in articlesGroupByLabel" :to="'/label/#' + value[0]"
+              :key="index" >{{ value[0]+" ("+value[1].length+") "}}</router-link>
           </section>
-          <section class="sidebar-section">
+          <section class="sidebar-section box-shadow">
             <a>111</a>
             <a>222</a>
           </section>
@@ -39,38 +37,39 @@
 
 <script lang="ts">
 import { defineComponent, watch, ref } from "vue";
-import { articles, labels, topics } from "@/Global";
-// import ArticleHtml from "@/components/MainPage/article.vue";
+import { articles, labels, topics,articlesGroupByLabel } from "@/Global";
 
 import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: "MainPage",
-  components: {
-    // ArticleHtml
-  },
   setup() {
-    const colors = ["#16A085", "#27AE60", "#2980B9", "#8E44AD", "#2C3E50"];
+    // const colors = ["#16A085", "#27AE60", "#2980B9", "#8E44AD", "#2C3E50"];
     const router = useRouter()
     const article_name = router.currentRoute.value.params.id
     // const article_name = ref(111)
-    watch(labels, (Global) => {
-      labels.value = Global;
+    watch(labels, (value) => {
+      labels.value = value;
     });
 
-    watch(articles, (Global) => {
-      articles.value = Global;
+    watch(articles, (value) => {
+      articles.value = value;
     });
 
-    watch(topics, (Global) => {
-      topics.value = Global;
+    watch(topics, (value) => {
+      topics.value = value;
+    });
+
+        watch(articlesGroupByLabel, (value) => {
+      articlesGroupByLabel.value = value;
     });
     return {
       article_name,
-      colors,
+      // colors,
       articles,
       labels,
       topics,
+      articlesGroupByLabel,
     };
   },
 });
@@ -96,8 +95,7 @@ export default defineComponent({
 }
 
 .sidebar-container {
-  background-color: #fff;
-  width: 340px;
+  width: 320px;
 }
 
 .sidebar-section {
@@ -110,11 +108,29 @@ export default defineComponent({
   white-space: nowrap !important;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: white;
+  color: #333;
+  background-color: #eaeaea;
   border-radius: 15px;
-  margin: 10px;
-  /* display: block; */
+  line-height: 30px;
+  margin: 5px;
+  padding: 0 7px;
+  font-size: 15px;
+  display: inline-block
 }
+
+.label-item:hover {
+  /* display: block; */
+  text-decoration:none;
+  color: #2b97ef !important;
+}
+
+
+.box-shadow {
+    -webkit-box-shadow: 0 1px 3px rgb(26 26 26 / 10%);
+    box-shadow: 0 1px 3px rgb(26 26 26 / 10%);
+    border-radius: 2px;
+}
+
 </style>
 
 ["label1","label2","label3","label4"]
