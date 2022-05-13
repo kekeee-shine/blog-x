@@ -14,37 +14,23 @@ export default {
   setup() {
     const router = useRouter()
     // const article_name = computed(() => {
-    //   return props.article_name
+    //   return router.currentRoute.value.params.id
     // })
-    const article_name = computed(() => {
-      return router.currentRoute.value.params.id
-    })
-    const article_html = ref("")
-    // const router = useRouter()
-    const article_url = "https://blog-resource-1257103956.cos.ap-nanjing.myqcloud.com/html/" + article_name.value + ".html";
-    onMounted(() => {
-      if (article_name.value && article_name.value.length > 0) {
-        axios.get(article_url)
-          .then(function (response) {
-            article_html.value = response.data;
-          })
-          .catch(function (error) {
-            article_html.value = "加载失败";
-          });
-      }
-    });
+    const article_name = router.currentRoute.value.params.id
 
-    // watch(article_name, (article_name) => {
-    //   if (article_name && article_name.length > 0) {
-    //     axios.get(article_url)
-    //       .then(function (response) {
-    //         article_html.value = response.data;
-    //       })
-    //       .catch(function (error) {
-    //         article_html.value = "加载失败";
-    //       });
-    //   }
-    // });
+    // const router = useRouter()
+    const article_url = "https://blog-resource-1257103956.cos.ap-nanjing.myqcloud.com/html/" + article_name + ".html";
+    
+    const article_html=ref("")
+    if (article_name && article_name.length > 0) {
+      axios.get(article_url)
+        .then(function (response) {
+              article_html.value =  response.data;
+        })
+        .catch(function (error) {
+          article_html.value =   "loading failed";
+        });
+    }
 
     return {
       article_html,

@@ -8,10 +8,8 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'home',
     component: BasicLayout,
-  //   children: [
-  //     {path: 'account1', component: account1},
-  //     {path: 'account2', component: account2},
-  // ]
+    children: [
+      {path: '/article/:id', component: ()=>import('@/components/MainPage/article.vue')}]
   },
   {
     path: '/about',
@@ -21,12 +19,12 @@ const routes: Array<RouteRecordRaw> = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
-  {
-    path: '/article/:id',
-    name: 'post',
-    component: BasicLayout
+  // {
+  //   path: '/article/:id',
+  //   name: 'post',
+  //   component: BasicLayout
 
-  },
+  // },
   {
     path: '/archive',
     name: 'archive',

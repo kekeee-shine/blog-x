@@ -503,7 +503,7 @@
   overflow: auto;
   font-size: 85%;
   line-height: 1.45;
-  background-color: #e2e2e2;
+  background-color: #333;
   border-radius: 3px;
 }
 
@@ -519,6 +519,7 @@
 .markdown-body pre code {
   display: inline;
   max-width: initial;
+  color: #e0e0e0;
   padding: 0;
   margin: 0;
   overflow: initial;

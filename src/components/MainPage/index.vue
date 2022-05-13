@@ -4,13 +4,13 @@
       <div class="post-container float-left">
         <!-- <router-link to="/">Home</router-link> |
         <router-view /> -->
-        <router-view :key="$route.fullPath">        <ArticleHtml></ArticleHtml></router-view>
+        <router-view :key="$route.fullPath"></router-view>
 
       </div>
 
       <aside class="sidebar-container float-left hidden-sm">
         <div>
-          <div class="temp">
+          <section class="sidebar-section">
             <!-- <a
               class="label-item"
               v-for="(label, index) in articles"
@@ -26,11 +26,11 @@
               :key="index" :style="{
                 'background-color': colors[index % 5],
               }">{{ label['name'] + (index % 5) }}</router-link>
-          </div>
-          <div class="temp">
+          </section>
+          <section class="sidebar-section">
             <a>111</a>
             <a>222</a>
-          </div>
+          </section>
         </div>
       </aside>
     </div>
@@ -40,14 +40,14 @@
 <script lang="ts">
 import { defineComponent, watch, ref } from "vue";
 import { articles, labels, topics } from "@/Global";
-import ArticleHtml from "@/components/MainPage/article.vue";
+// import ArticleHtml from "@/components/MainPage/article.vue";
 
 import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: "MainPage",
   components: {
-    ArticleHtml
+    // ArticleHtml
   },
   setup() {
     const colors = ["#16A085", "#27AE60", "#2980B9", "#8E44AD", "#2C3E50"];
@@ -92,18 +92,18 @@ export default defineComponent({
 
 .post-container {
   padding: 30px, 0px;
-  background-color: bisque;
+  background-color: #fff;
 }
 
 .sidebar-container {
-  /* background-color: cadetblue; */
+  background-color: #fff;
+  width: 340px;
 }
 
-.temp {
-  margin: 15px;
-  background-color: burlywood;
+.sidebar-section {
+  margin: 0px 15px 15px 15px;
+  background-color: #fff;
   padding: 10px;
-  max-width: 200px;
 }
 
 .label-item {
@@ -111,6 +111,7 @@ export default defineComponent({
   overflow: hidden;
   text-overflow: ellipsis;
   color: white;
+  border-radius: 15px;
   margin: 10px;
   /* display: block; */
 }
