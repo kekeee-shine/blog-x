@@ -20,7 +20,7 @@
         </ul>
       </nav>
     </div>
-    <div id="kk-category-nav" class="header-container hidden-xs">
+    <div id="kk-category-nav" class="header-container hidden-xs" style="display: none;">
       <nav class="text-right">
         <ul class="float-left">
           <li
@@ -45,10 +45,6 @@
               </li>
             </ul>
           </li>
-          <!-- <router-link to="/1">分栏1</router-link></li>
-      <li><router-link to="/2">分栏1</router-link></li>
-      <li><router-link to="/3">分栏1</router-link></li>
-      <li><router-link to="/4">分栏1</router-link></li> -->
         </ul>
       </nav>
     </div>
@@ -64,11 +60,11 @@ export default defineComponent({
 
   setup() {
     const navs = [
-      { name: "专题", path: "/a" },
-      { name: "归档", path: "/b" },
-      { name: "待定1", path: "/c" },
-      { name: "待定2", path: "/d" },
-      { name: "待定3", path: "/e" },
+      { name: "专题", path: "/topic" },
+      { name: "归档", path: "/archive" },
+      { name: "待定", path: "/" },
+      { name: "待定", path: "/" },
+      { name: "待定", path: "/" },
     ];
 
     const categories = ref([

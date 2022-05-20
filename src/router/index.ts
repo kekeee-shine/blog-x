@@ -6,13 +6,15 @@ import GlobalHeader from '../components/GlobalHeader/index.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
+    redirect:"/home",
     name: 'home',
     component: BasicLayout,
     children: [
       {path: '/article/:id', component: ()=>import('@/views/ArticleDetailView.vue')},
       {path: '/archive', component: ()=>import('@/views/ArticleListView.vue')},
       {path: '/label', component: ()=>import('@/views/ArticleListView.vue')},
-      {path: '/topic', component: ()=>import('@/views/ArticleListView.vue')}]
+      {path: '/topic', component: ()=>import('@/views/ArticleListView.vue')},
+      {path: '/home', component: ()=>import('@/views/ArticleListView.vue')}]
   }
 ]
 

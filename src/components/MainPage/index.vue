@@ -2,37 +2,23 @@
   <main>
     <div class="markdown-body main-container">
       <div class="post-container float-left box-shadow">
-        <!-- <router-link to="/">Home</router-link> |
-        <router-view /> -->
         <router-view :key="$route.fullPath"></router-view>
       </div>
 
-      <aside class="sidebar-container float-left hidden-sm">
+      <aside class="sidebar-container float-left hidden-xs hidden-sm">
         <div>
           <section class="sidebar-section box-shadow">
-            <!-- <a
-              class="label-item"
-              v-for="(label, index) in articles"
-              :href="'/article/'+label['name']"
-              :key="index"
-              :style="{
-                'background-color': colors[index % 5],
-              }"
-              >{{ label['name'] + (index % 5) }}</a
-            > -->
 
             <router-link
               class="label-item"
               v-for="(value, index) in label_items"
-              :to="'/label/#' + value[0]"
+              :to="'/label/#group_' + value[0]"
               :key="index"
               >{{ value[0] + " (" + value[1].length + ") " }}</router-link
             >
           </section>
-          <section class="sidebar-section box-shadow">
-            <a>111</a>
-            <a>222</a>
-          </section>
+          <!-- <section class="sidebar-section box-shadow">
+          </section> -->
         </div>
       </aside>
     </div>
@@ -48,7 +34,6 @@ import { useRouter } from "vue-router";
 export default defineComponent({
   name: "MainPage",
   setup() {
-    // const colors = ["#16A085", "#27AE60", "#2980B9", "#8E44AD", "#2C3E50"];
     const router = useRouter();
     const article_name = router.currentRoute.value.params.id;
 
@@ -122,5 +107,3 @@ export default defineComponent({
   border-radius: 2px;
 }
 </style>
-
-["label1","label2","label3","label4"]

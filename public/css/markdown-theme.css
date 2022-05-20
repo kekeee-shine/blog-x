@@ -83,18 +83,3 @@ Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiac
 .nginx .hljs-title {
   color: black;
 }
-.hljs-string,
-.hljs-title,
-.hljs-constant,
-.hljs-parent,
-.hljs-tag .hljs-value,
-.hljs-rules .hljs-value,
-.hljs-preprocessor,
-.hljs-pragma,
-.haml .hljs-symbol,
-.ruby .hljs-symbol,
-.ruby .hljs-symbol .hljs-string,
-.hljs-template_tag,
-.django .hljs-variable,
-.smalltalk .hljs-class,
-.hljs-addition,

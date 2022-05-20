@@ -1,24 +1,22 @@
 <template>
   <div v-html="article_html"></div>
 </template>
-<style>
-</style>
+
 
 <script>
 import { computed,onMounted, watch, ref, toRefs } from "vue";
 import axios from 'axios'
+import {bucket_url } from "@/Global";
+
 import { useRouter } from 'vue-router'
+    const router = useRouter()
 export default {
-  name: "ArticleDetailView",
   setup() {
     const router = useRouter()
-    // const article_name = computed(() => {
-    //   return router.currentRoute.value.params.id
-    // })
+
     const article_name = router.currentRoute.value.params.id
 
-    // const router = useRouter()
-    const article_url = "https://blog-resource-1257103956.cos.ap-nanjing.myqcloud.com/html/" + article_name + ".html";
+    const article_url = bucket_url+"html/" + article_name + ".html";
     
     const article_html=ref("")
     if (article_name && article_name.length > 0) {
@@ -39,3 +37,7 @@ export default {
   }
 };
 </script>
+
+
+<style scoped>
+</style>
