@@ -6,7 +6,7 @@ import GlobalHeader from '../components/GlobalHeader/index.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect:"/home",
+    redirect:"/archive",
     name: 'home',
     component: BasicLayout,
     children: [
