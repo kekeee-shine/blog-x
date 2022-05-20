@@ -13,7 +13,7 @@
         </a>
         <ul class="float-right">
           <li class="float-left" v-for="nav in navs" :key="nav">
-            <router-link class="a-hover" :to="nav.path">{{
+            <router-link class="nav-hover" :to="nav.path">{{
               nav.name
             }}</router-link>
           </li>
@@ -30,7 +30,7 @@
             @mouseover="category.show = !category.show"
             @mouseout="category.show = !category.show"
           >
-            <a class="a-hover">{{ category.name }} ▾</a>
+            <a class="nav-hover">{{ category.name }} ▾</a>
             <ul class="sub-category-ul" v-show="category.show">
               <li
                 v-for="subCategory in category.subCategory"

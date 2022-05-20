@@ -125,8 +125,13 @@ export default defineComponent({
 .text-inline {
   white-space: nowrap !important;
 }
-.a-hover:hover {
+.nav-hover:hover {
   color: #ffffff !important;
+}
+
+.context-hover:hover {
+  text-decoration:none !important;
+  color: #2b97ef !important;
 }
 
 .no-margin {
