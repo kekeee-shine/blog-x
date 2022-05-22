@@ -13,7 +13,7 @@
 <script lang="ts">
 import { defineComponent, ref, watch, computed } from "vue";
 import { useRouter } from 'vue-router'
-import {articlesGroupByTime, articlesGroupByTopic, articlesGroupByLabel } from "@/Global";
+import { articlesGroupByTime, articlesGroupByTopic, articlesGroupByLabel } from "@/Global";
 
 export default defineComponent({
   name: "ArticleListView",
@@ -45,7 +45,7 @@ export default defineComponent({
       _li_items.push({ title: group_key, path: '/' + group_kind + '/#group_' + group_key, is_group: true })
       for (let i = 0; i < group_value.length; i++) {
         let article = group_value[i]
-        _li_items.push({ title: article['title'].length>0?article['title']:'No Name', path: '/article/' + article['name'], is_group: false })
+        _li_items.push({ title: article['title'].length > 0 ? article['title']+article['create_time']: 'No Name'+article['create_time'], path: '/article/' + article['name'], is_group: false })
       }
     }
     li_items.value = _li_items
@@ -57,7 +57,13 @@ export default defineComponent({
 </script>
 
 
-<style scoped>
+<style >
+@media (min-width: 1200px) {
+  .main-container {
+    width: 1000px !important;
+  }
+}
+
 .group-item a {
   color: #333;
   font-size: 24px;
@@ -65,9 +71,9 @@ export default defineComponent({
 }
 
 .article-item a {
-    font-size: 20px;
+  font-size: 20px;
   color: #2c3e50;
-  
+
 }
 
 .post-list {

@@ -10,6 +10,12 @@ const articlesGroupByTime = ref()
 const articlesGroupByTopic = ref()
 const articlesGroupByLabel = ref()
 const bucket_url = 'https://blog-resource-1257103956.cos.ap-nanjing.myqcloud.com/'
+
+const article_context = ref()
+
+const current_article_headings = ref()
+const current_topic = ref();
+const current_topic_articles = ref()
 axios
     .get(
         bucket_url + "data/articles.json"
@@ -49,7 +55,8 @@ axios
 
 
         const time_map: Map<string, []> = new Map();
-
+        
+        //按照时间排序 需要reverse 一次
         const reverse_articles_values = articles_values.reverse()
         for (let i = 0; i < reverse_articles_values.length; i++) {
             const article = reverse_articles_values[i]
@@ -91,7 +98,11 @@ axios.get(
 
 import { watch } from "vue";
 
+watch(current_topic,(value)=>{
 
+    current_topic_articles.value = articlesGroupByTopic.value.get(current_topic.value);
+    console.log(1111)
+})
 export {
     bucket_url,
 
@@ -100,5 +111,11 @@ export {
     topics,
     articlesGroupByTime,
     articlesGroupByTopic,
-    articlesGroupByLabel
+    articlesGroupByLabel,
+
+    article_context,    
+
+    current_article_headings,
+    current_topic,
+    current_topic_articles,
 }

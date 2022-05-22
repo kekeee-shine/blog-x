@@ -3,45 +3,28 @@
     <div class="header-container">
       <nav id="kk-header-nav" class="text-right">
         <a class="float-left" href="/">
-          <img
-            class="float-left"
-            style="width: 44px; height: 44px"
-            src="../../assets/logo.png"
-            alt=""
-          />
+          <img class="float-left" style="width: 44px; height: 44px" src="../../assets/logo.png" alt="" />
           <span>Kekeee</span>
         </a>
         <ul class="float-right">
           <li class="float-left" v-for="nav in navs" :key="nav">
             <router-link class="nav-hover" :to="nav.path">{{
-              nav.name
+                nav.name
             }}</router-link>
           </li>
         </ul>
       </nav>
     </div>
-    <div id="kk-category-nav" class="header-container hidden-xs" style="display: none;">
+    <div id="kk-category-nav" class="header-container hidden-xs">
       <nav class="text-right">
         <ul class="float-left">
-          <li
-            class="float-left"
-            v-for="category in categories"
-            :key="category"
-            @mouseover="category.show = !category.show"
-            @mouseout="category.show = !category.show"
-          >
+          <li class="float-left" v-for="category in categories" :key="category"
+            @mouseover="category.show = !category.show" @mouseout="category.show = !category.show">
             <a class="nav-hover">{{ category.name }} ▾</a>
             <ul class="sub-category-ul" v-show="category.show">
-              <li
-                v-for="subCategory in category.subCategory"
-                class="sub-category-li"
-                :key="subCategory"
-              >
-                <router-link
-                  class="sub-category-item text-left"
-                  :to="subCategory.path"
-                  >{{ subCategory.name }}</router-link
-                >
+              <li v-for="subCategory in category.subCategory" class="sub-category-li" :key="subCategory">
+                <router-link class="sub-category-item text-left" :to="subCategory.path">{{ subCategory.name }}
+                </router-link>
               </li>
             </ul>
           </li>
@@ -99,12 +82,15 @@ export default defineComponent({
   padding: 10px 0;
   margin-bottom: 0;
 }
-#kk-header-nav > ul > li {
+
+#kk-header-nav>ul>li {
   display: inline-block;
 }
+
 #kk-header-nav ul {
   list-style: none;
 }
+
 #kk-header-nav a {
   padding: 0 10px;
   font-size: 18px;
@@ -153,15 +139,18 @@ export default defineComponent({
 .sub-category-item {
   color: #48535c !important;
 }
+
 // 子分栏hover
 .sub-category-item:hover {
   display: block;
   color: #fafafa !important;
   background-color: rgba(62, 71, 79, 0.8);
 }
+
 .header {
   background: #223344;
   padding: 0px;
+  z-index: 9999;
 
   a {
     color: #b2bbbd;
@@ -172,6 +161,7 @@ export default defineComponent({
     margin: 0 !important;
     padding: 0 !important;
   }
+
   // 图标 站名
   span {
     color: #dddddd;
@@ -179,6 +169,7 @@ export default defineComponent({
     height: 44px;
     line-height: 44px;
   }
+
   #kk-category-nav ul li {
     font-family: "Microsoft YaHei", "Helvetica", "Meiryo UI", "Malgun Gothic",
       "Segoe UI", "Trebuchet MS", "Monaco", "monospace", "Tahoma", "STXihei",

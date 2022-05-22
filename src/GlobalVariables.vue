@@ -2,7 +2,7 @@
 <script>
 const HOME = "https://www.yangshuaionline.com/";
 //保存全局状态
-import  { Vue,ref } from "vue";
+import { Vue, ref } from "vue";
 import axios from 'axios'
 
 export default {
@@ -42,7 +42,7 @@ export default {
         console.log(error);
       });
 
-    return{
+    return {
       articles,
       labels,
       topics,

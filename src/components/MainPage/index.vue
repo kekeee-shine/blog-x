@@ -5,20 +5,13 @@
         <router-view :key="$route.fullPath"></router-view>
       </div>
 
-      <aside class="sidebar-container float-left hidden-xs hidden-sm">
+      <aside class="gkt-sidebar float-left hidden-xs hidden-sm">
         <div>
-          <section class="sidebar-section box-shadow">
-
-            <router-link
-              class="label-item"
-              v-for="(value, index) in label_items"
-              :to="'/label/#group_' + value[0]"
-              :key="index"
-              >{{ value[0] + " (" + value[1].length + ") " }}</router-link
-            >
+          <section class="box-shadow">
+            <SideBarLabelView v-if="!toc_mode"></SideBarLabelView>
+            <SideBarTocView v-else></SideBarTocView>
           </section>
-          <!-- <section class="sidebar-section box-shadow">
-          </section> -->
+
         </div>
       </aside>
     </div>
@@ -27,26 +20,41 @@
 
 <script lang="ts">
 import { defineComponent, watch, ref, computed } from "vue";
-import { articles, labels, topics, articlesGroupByLabel } from "@/Global";
-
+import { articlesGroupByLabel } from "@/Global";
 import { useRouter } from "vue-router";
+
+import SideBarLabelView from '@/views/sidebarViews/SideBarLabelView.vue'
+import SideBarTocView from '@/views/sidebarViews/SideBarTocView.vue'
 
 export default defineComponent({
   name: "MainPage",
+  components: {
+    SideBarLabelView,
+    SideBarTocView
+  },
   setup() {
     const router = useRouter();
     const article_name = router.currentRoute.value.params.id;
 
-    const label_items =computed(() => {
+
+
+    const toc_mode = computed(()=>{
+      if (router.currentRoute.value.path.startsWith('/article')){
+        return true;
+      }
+      else{
+        return false;
+      }
+    });
+
+    const label_items = computed(() => {
       return articlesGroupByLabel.value
     })
 
     return {
       article_name,
-      articles,
-      labels,
-      topics,
       label_items,
+      toc_mode
     };
   },
 });
@@ -69,41 +77,5 @@ export default defineComponent({
 .post-container {
   padding: 30px, 0px;
   background-color: #fff;
-}
-
-.sidebar-container {
-  width: 320px;
-}
-
-.sidebar-section {
-  margin: 0px 15px 15px 15px;
-  background-color: #fff;
-  padding: 10px;
-}
-
-.label-item {
-  white-space: nowrap !important;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: #333;
-  background-color: #eaeaea;
-  border-radius: 15px;
-  line-height: 30px;
-  margin: 5px;
-  padding: 0 7px;
-  font-size: 15px;
-  display: inline-block;
-}
-
-.label-item:hover {
-  /* display: block; */
-  text-decoration: none;
-  color: #2b97ef !important;
-}
-
-.box-shadow {
-  -webkit-box-shadow: 0 1px 3px rgb(26 26 26 / 10%);
-  box-shadow: 0 1px 3px rgb(26 26 26 / 10%);
-  border-radius: 2px;
 }
 </style>

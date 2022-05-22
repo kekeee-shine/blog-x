@@ -3,11 +3,18 @@
     <!-- layout header -->
     <global-header />
     <!-- layout content -->
-    <a-layout-content
+    <!-- <a-layout-content
       style="{ margin: '24px 24px 0', paddingTop: fixedHeader ? '40px' : '0' }"
     >
       <main-page />
-    </a-layout-content>
+    </a-layout-content> -->
+
+        <!-- <a-layout-content
+      style="{ margin: '24px 24px 0', paddingTop: fixedHeader ? '40px' : '0' }"
+    > -->
+    <div class="main-container">
+      <main-page class="col-xs-12 padding-0"/>
+    </div>
 
     <!-- layout footer -->
     <global-footer />
@@ -98,13 +105,15 @@ export default defineComponent({
     width: calc(100% - 320px);
   }
 }
-@media (min-width: 1200px) {
+
+
+/* @media (min-width: 1200px) {
   .header-container,
   .main-container {
     width: 100%;
     max-width: 1150px;
   }
-}
+} */
 
 .text-center {
   text-align: center !important;
@@ -127,6 +136,10 @@ export default defineComponent({
 }
 .nav-hover:hover {
   color: #ffffff !important;
+}
+
+.context-hover{
+    color: #2c3e50 !important;
 }
 
 .context-hover:hover {
