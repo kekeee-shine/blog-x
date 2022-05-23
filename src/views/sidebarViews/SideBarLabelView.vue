@@ -1,6 +1,12 @@
 <template>
-    <router-link class="label-item context-hover" v-for="(value, index) in label_items"
-      :to="'/label/#group_' + value[0]" :key="index">{{ value[0] + " (" + value[1].length + ") " }}</router-link>
+  <router-link
+    class="label-item context-hover"
+    v-for="(value, index) in label_items"
+    :to="'/label/#group_' + value[0]"
+    :key="index"
+    @click="scrollToSection('group_' + value[0])"
+    >{{ value[0] + " (" + value[1].length + ") " }}</router-link
+  >
 </template>
 
 <script lang="ts">
@@ -11,13 +17,22 @@ import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "SideBarLabelView",
+  methods: {
+    scrollToSection(id: string) {
+      let section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView();
+      }
+    },
+  },
+
   setup() {
     const router = useRouter();
     const article_name = router.currentRoute.value.params.id;
 
     const label_items = computed(() => {
-      return articlesGroupByLabel.value
-    })
+      return articlesGroupByLabel.value;
+    });
 
     return {
       article_name,
