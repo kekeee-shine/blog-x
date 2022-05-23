@@ -3,14 +3,12 @@
     <strong>{{ current_topic }}</strong>
     <ul>
       <li v-for="article in current_topic_articles" :key="article">
-      
-        <!-- :class="article.is_group ? 'group-item' : 'article-item'" -->
-            <router-link class="context-hover" :to="'/article/' + article['name']">
-              <span>{{ article['title'].length>0?article['title']:'No Name' }}</span>
-            </router-link>
+        <router-link class="context-hover" :to="'/article/' + article['name']">
+          <span>{{ article['title'].length > 0 ? article['title'] : 'No Name' }}</span>
+        </router-link>
         <ol v-if="article['name'] == article_name">
           <li v-for="heading_item in current_article_headings" :key="heading_item">
-            <router-link class="context-hover" :to="'#' + heading_item">
+            <router-link class="context-hover" :to="'#' + heading_item"     @click="scrollToSection(heading_item)">
               <span>{{ heading_item }}</span>
             </router-link>
 
@@ -29,6 +27,16 @@ import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "SideBarTocView",
+
+    methods: {
+    scrollToSection(id: string) {
+      let section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView();
+      }
+    },
+  },
+
   setup() {
     const router = useRouter();
     const article_name = router.currentRoute.value.params.id;
@@ -36,6 +44,8 @@ export default defineComponent({
 
     //todo 移动到其他地方
     //todo heading加载可以考虑改成document.querySelectorAll()
+
+    
     watch(article_context, (value) => {
       let title_reg = '<(.+?)>';
       let title_tag = value.match(title_reg)[1];
@@ -73,8 +83,7 @@ export default defineComponent({
 
 
 <style scoped>
-
-.sidebar-toc{
+.sidebar-toc {
   line-height: 1.8em;
 }
 
@@ -86,9 +95,11 @@ export default defineComponent({
   font-size: 16px;
 }
 
-.sidebar-toc ul,.sidebar-toc ol{
-      padding-left: 1.5em;
+.sidebar-toc ul,
+.sidebar-toc ol {
+  padding-left: 1.5em;
 }
+
 .sidebar-toc ul ol {
   list-style-type: circle;
 }
