@@ -24,10 +24,12 @@ export default defineComponent({
     const li_items = ref()
 
     let group_kind
-    let group_map = []
+    let group_map = new Map()
     if (route_path.startsWith('/archive')) {
       group_kind = 'archive'
       group_map = articlesGroupByTime.value;
+            console.log(1111)
+      console.log(JSON.stringify(group_map))
     } else if (route_path.startsWith('/label')) {
       group_kind = 'label'
       group_map = articlesGroupByLabel.value
@@ -39,7 +41,7 @@ export default defineComponent({
     }
 
     let _li_items = [] as any
-
+    if (group_map) {
     for (let [group_key, group_value] of group_map.entries()) {
       console.log("entries2", group_key, group_key);
       _li_items.push({ title: group_key, path: '/' + group_kind + '/#group_' + group_key, is_group: true })
@@ -49,6 +51,8 @@ export default defineComponent({
       }
     }
     li_items.value = _li_items
+    }
+
     return {
       li_items,
     };
@@ -71,7 +75,7 @@ export default defineComponent({
 }
 
 .article-item a {
-  font-size: 20px;
+  font-size: 16px;
   color: #2c3e50;
 
 }

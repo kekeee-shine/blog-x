@@ -1,7 +1,7 @@
 <template>
   <main>
-    <div class="markdown-body main-container">
-      <div class="post-container float-left box-shadow">
+    <!-- <div class="markdown-body main-container"> -->
+      <div class="post-container markdown-body float-left box-shadow">
         <router-view :key="$route.fullPath"></router-view>
       </div>
 
@@ -14,7 +14,7 @@
 
         </div>
       </aside>
-    </div>
+    <!-- </div> -->
   </main>
 </template>
 

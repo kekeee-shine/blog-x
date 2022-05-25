@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="">
   <script>
-  //   (function () {
-  //     // var goTop = document.getElementById('go-top');
-  //     // var mainContainer = document.querySelector('.main-container');
-      
-  //     goTop.addEventListener('click', function () {
-  //         window.scroll(0, 0);
-  //     }, false);
-  //     window.addEventListener('scroll', function () {
-  //         var right = document.body.offsetWidth - mainContainer.getBoundingClientRect().right;
-  //         var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-  //         goTop.style.right = right + 10 + 'px'
-  //         scrollTop > 700 && (goTop.style.display = "block");
-  //         scrollTop <= 700 && (goTop.style.display = "none");
-  //     });
-  // })();
+    (function () {
+      // goTop.addEventListener('click', function () {
+      //     window.scroll(0, 0);
+      // }, false);
+      window.addEventListener('scroll', function () {
+          var goTop = document.getElementById('go-top');
+          var mainContainer = document.querySelector('.main-container');
+          // goTop.addEventListener('click', function () {
+          //     window.scroll(0, 0);
+          // }, false);
+          var right = document.body.offsetWidth - mainContainer.getBoundingClientRect().right;
+          var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+          goTop.style.right = right + 10 + 'px'
+          scrollTop > 700 && (goTop.style.display = "block");
+          scrollTop <= 700 && (goTop.style.display = "none");
+      });
+  })();
 
   (function () {
   var h2 = document.querySelectorAll('article h2');
@@ -58,8 +60,12 @@
           }
           var nav = document.querySelector('#kk-header-nav');
           var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-          scrollTop > 50 && (nav.classList.add('hide'));
+          var wrapper = document.querySelector(".gkt-sidebar-wrapper");
+          scrollTop > 50 && (nav.classList.add('hide')) ;
           scrollTop <= 50 && (nav.classList.remove('hide'));
+
+          scrollTop > 50  && wrapper.classList.add("gkt-sidebar-fixed");
+          scrollTop <= 50  && wrapper.classList.remove("gkt-sidebar-fixed");
       });
       var cateNavs = document.querySelectorAll('#gkt-cate-nav>nav>ul>li');
       [].slice.call(cateNavs).forEach(function (item) {

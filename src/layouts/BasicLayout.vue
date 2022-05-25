@@ -18,6 +18,8 @@
       <main-page class="col-xs-12 padding-0" />
     </div>
 
+    <img id="go-top" src="/icon/top.png" class="hidden-xs" onclick="javascript:window.scroll(0, 0)">
+
     <!-- layout footer -->
     <global-footer />
   </a-layout>
@@ -216,5 +218,15 @@ h6 {
   top: 50px;
   margin-top: 0;
   z-index: 1;
+}
+
+img#go-top {
+  display: block; 
+  right: 182.714px;
+      position: fixed;
+    bottom: 100px;
+    width: 50px;
+    cursor: pointer;
+    z-index: 9999;
 }
 </style>
