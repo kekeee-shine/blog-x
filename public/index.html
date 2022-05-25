@@ -11,11 +11,13 @@
           // goTop.addEventListener('click', function () {
           //     window.scroll(0, 0);
           // }, false);
-          var right = document.body.offsetWidth - mainContainer.getBoundingClientRect().right;
+          if(goTop&&mainContainer){
+            var right = document.body.offsetWidth - mainContainer.getBoundingClientRect().right;
           var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
           goTop.style.right = right + 10 + 'px'
           scrollTop > 700 && (goTop.style.display = "block");
           scrollTop <= 700 && (goTop.style.display = "none");
+          }
       });
   })();
 
