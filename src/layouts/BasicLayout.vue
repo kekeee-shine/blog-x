@@ -167,17 +167,6 @@ ul {
   list-style: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.nav,
-.header .footer {
-  font-family: "Lato", sans-serif;
-}
-
 /* html,
 body,
 p,
