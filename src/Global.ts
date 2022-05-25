@@ -55,7 +55,7 @@ axios
 
 
         const time_map: Map<string, []> = new Map();
-        
+
         //按照时间排序 需要reverse 一次
         const reverse_articles_values = articles_values.reverse()
         for (let i = 0; i < reverse_articles_values.length; i++) {
@@ -87,7 +87,7 @@ axios.get(
     });
 
 axios.get(
-    bucket_url+"data/topics.json"
+    bucket_url + "data/topics.json"
 )
     .then(function (response) {
         topics.value = response.data;
@@ -98,11 +98,37 @@ axios.get(
 
 import { watch } from "vue";
 
-watch(current_topic,(value)=>{
-
-    current_topic_articles.value = articlesGroupByTopic.value.get(current_topic.value);
+watch(current_topic, (value) => {
+    current_topic_articles.value = articlesGroupByTopic.value.get(value);
     console.log(1111)
 })
+
+watch(article_context, (article_context_value) => {
+    const title_reg = '<(.+?)>';
+    const title_tag = article_context_value.match(title_reg)[1];
+    let heading_tag;
+    if (title_tag == 'h2') {
+        heading_tag = 'h3'
+    } else if (title_tag == 'h3') {
+        heading_tag = 'h4'
+    } else {
+        heading_tag = 'h2'
+    }
+
+    heading_tag = 'h3'
+    const res = article_context_value.matchAll('<' + heading_tag + '(.+?)</' + heading_tag + '>');
+
+    // res = Array.from(res) // iterator -> array
+
+    const _headings = []
+    for (const iterator of res) {
+        const _value = iterator[1]
+        _headings.push(_value.slice(_value.indexOf('>') + 1))
+    }
+    current_article_headings.value = _headings
+})
+
+
 export {
     bucket_url,
 
@@ -113,7 +139,7 @@ export {
     articlesGroupByTopic,
     articlesGroupByLabel,
 
-    article_context,    
+    article_context,
 
     current_article_headings,
     current_topic,

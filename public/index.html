@@ -1,5 +1,100 @@
 <!DOCTYPE html>
 <html lang="">
+  <script>
+  //   (function () {
+  //     // var goTop = document.getElementById('go-top');
+  //     // var mainContainer = document.querySelector('.main-container');
+      
+  //     goTop.addEventListener('click', function () {
+  //         window.scroll(0, 0);
+  //     }, false);
+  //     window.addEventListener('scroll', function () {
+  //         var right = document.body.offsetWidth - mainContainer.getBoundingClientRect().right;
+  //         var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  //         goTop.style.right = right + 10 + 'px'
+  //         scrollTop > 700 && (goTop.style.display = "block");
+  //         scrollTop <= 700 && (goTop.style.display = "none");
+  //     });
+  // })();
+
+  (function () {
+  var h2 = document.querySelectorAll('article h2');
+  var h3 = document.querySelectorAll('article h3');
+  var linkList = document.querySelectorAll('#sidebar-toc a');
+
+  function findLinkElement(name) {
+    for (var i = 0; i < linkList.length; i++) {
+      var items = linkList[i].href.split('#');
+      if (items && items[items.length - 1] === encodeURIComponent(name)) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  function activeLink(titleList) {
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    for (var i = titleList.length - 1; i >= 0; i--) {
+      if (scrollTop - titleList[i].offsetTop > 0) {
+        var index = findLinkElement(titleList[i].id);
+        index != -1 && linkList[index].classList.add('gkt-sidebar-active');
+        break;
+      }
+    }
+  }
+
+  window.addEventListener("scroll", function (e) {
+    [].slice.call(linkList).forEach(function (link) {
+      link.classList.remove('gkt-sidebar-active');
+    })
+    activeLink(h2);
+  })
+})();
+
+(function () {
+      window.addEventListener('scroll', function () {
+          if (window.innerWidth < 768) {
+              return;
+          }
+          var nav = document.querySelector('#kk-header-nav');
+          var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+          scrollTop > 50 && (nav.classList.add('hide'));
+          scrollTop <= 50 && (nav.classList.remove('hide'));
+      });
+      var cateNavs = document.querySelectorAll('#gkt-cate-nav>nav>ul>li');
+      [].slice.call(cateNavs).forEach(function (item) {
+          var sub = item.querySelector('.gkt-sub-cate');
+          if (!sub) return;
+          item.addEventListener('mouseenter', function (e) { sub.style.display = 'block'; }, false);
+          item.addEventListener('mouseleave', function (e) { sub.style.display = 'none'; }, false);
+      })
+  })();
+
+  
+  //  (function () {
+  //     var ele = getDom('.gkt-sidebar-content')
+  //     if(!ele) return;
+  //     var wrapper = getDom('.gkt-sidebar-wrapper')
+  //     var last = 0
+  //     ele.style.maxHeight = ((window.innerHeight || 798) - 200) + 'px'
+  //     var f = function (e) {
+  //         var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  //         var isDown = scrollTop > last;
+  //         var pos = getPosition(ele).y - scrollTop;
+  //         var downLimit = 50;
+  //         var upLimit = -100;
+  //         // uarrow.style.marginTop = scrollTop + 'px';
+  //         isDown && pos <= downLimit && wrapper.classList.add("gkt-sidebar-fixed");
+  //         !isDown && pos > upLimit && wrapper.classList.remove("gkt-sidebar-fixed");
+  //         last = scrollTop
+  //     }
+  //     f()
+  //     window.addEventListener("scroll", f)
+  // })();
+
+
+</script>
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +105,7 @@
     <link rel="stylesheet" href="css/markdown-theme.css">
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
-  <body style="margin: 0px; overflow-y:auto;background-color: #eaeaea">
+  <body style="margin: 0px; overflow-y:auto;background-color: #f6f6f6">
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>

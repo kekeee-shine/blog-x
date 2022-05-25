@@ -2,6 +2,8 @@
   <a-layout :class="['layout', device]">
     <!-- layout header -->
     <global-header />
+    <div class="gkt-header-placeholder" style="height: 44px"></div>
+    <div class="gkt-header-placeholder hidden-xs" style="height: 44px"></div>
     <!-- layout content -->
     <!-- <a-layout-content
       style="{ margin: '24px 24px 0', paddingTop: fixedHeader ? '40px' : '0' }"
@@ -9,11 +11,11 @@
       <main-page />
     </a-layout-content> -->
 
-        <!-- <a-layout-content
+    <!-- <a-layout-content
       style="{ margin: '24px 24px 0', paddingTop: fixedHeader ? '40px' : '0' }"
     > -->
     <div class="main-container">
-      <main-page class="col-xs-12 padding-0"/>
+      <main-page class="col-xs-12 padding-0" />
     </div>
 
     <!-- layout footer -->
@@ -49,8 +51,8 @@ export default defineComponent({
       labels,
       aaa,
       bbb,
-    }
-  }
+    };
+  },
 });
 </script>
 
@@ -106,14 +108,13 @@ export default defineComponent({
   }
 }
 
-
-/* @media (min-width: 1200px) {
+@media (min-width: 1200px) {
   .header-container,
   .main-container {
     width: 100%;
     max-width: 1150px;
   }
-} */
+}
 
 .text-center {
   text-align: center !important;
@@ -138,12 +139,12 @@ export default defineComponent({
   color: #ffffff !important;
 }
 
-.context-hover{
-    color: #2c3e50 !important;
+.context-hover {
+  color: #2c3e50 !important;
 }
 
 .context-hover:hover {
-  text-decoration:none !important;
+  text-decoration: none !important;
   color: #2b97ef !important;
 }
 
@@ -208,5 +209,12 @@ h6 {
   /* padding-top: 20px;
   padding-bottom: 30px; */
   overflow: hidden;
+}
+
+.gkt-sidebar-fixed {
+  position: fixed;
+  top: 50px;
+  margin-top: 0;
+  z-index: 1;
 }
 </style>

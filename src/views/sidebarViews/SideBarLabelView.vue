@@ -21,7 +21,7 @@ export default defineComponent({
     scrollToSection(id: string) {
       let section = document.getElementById(id);
       if (section) {
-        section.scrollIntoView();
+        section.scrollIntoView({ behavior: 'smooth' });
       }
     },
   },

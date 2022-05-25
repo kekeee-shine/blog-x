@@ -151,6 +151,8 @@ export default defineComponent({
   background: #223344;
   padding: 0px;
   z-index: 9999;
+  width: 100%;
+  position: fixed;
 
   a {
     color: #b2bbbd;
@@ -176,6 +178,11 @@ export default defineComponent({
       "华文细黑", "STHeiti", "Helvetica Neue", "Droid Sans",
       "wenquanyi micro hei", "FreeSans", "Arimo", "Arial", "SimSun", "宋体",
       "Heiti", "黑体", "sans-serif";
+  }
+}
+.header {
+  * {
+      z-index: 9999;
   }
 }
 </style>

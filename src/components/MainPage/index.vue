@@ -6,7 +6,7 @@
       </div>
 
       <aside class="gkt-sidebar float-left hidden-xs hidden-sm">
-        <div>
+        <div class='gkt-sidebar-wrapper'>
           <section class="box-shadow">
             <SideBarLabelView v-if="!toc_mode"></SideBarLabelView>
             <SideBarTocView v-else></SideBarTocView>

@@ -3,15 +3,27 @@
     <strong>{{ current_topic }}</strong>
     <ul>
       <li v-for="article in current_topic_articles" :key="article">
-        <router-link class="context-hover" :to="'/article/' + article['name']">
-          <span>{{ article['title'].length > 0 ? article['title'] : 'No Name' }}</span>
+        <router-link
+          class="context-hover"
+          :class="article['name'] == article_name ? 'sidebar-toc-active' : ''"
+          :to="'/article/' + article['name']"
+        >
+          <span>{{
+            article["title"].length > 0 ? article["title"] : "No Name"
+          }}</span>
         </router-link>
         <ol v-if="article['name'] == article_name">
-          <li v-for="heading_item in current_article_headings" :key="heading_item">
-            <router-link class="context-hover" :to="'#' + heading_item"     @click="scrollToSection(heading_item)">
+          <li
+            v-for="heading_item in current_article_headings"
+            :key="heading_item"
+          >
+            <router-link
+              class="context-hover"
+              :to="'#' + heading_item"
+              @click="scrollToSection(heading_item)"
+            >
               <span>{{ heading_item }}</span>
             </router-link>
-
           </li>
         </ol>
       </li>
@@ -20,56 +32,85 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, watch } from "vue";
-import { articles, articlesGroupByTopic, article_context, current_article_headings, current_topic, current_topic_articles } from "@/Global";
+import { defineComponent, computed, onMounted } from "vue";
+import {
+  articlesGroupByTopic,
+  current_article_headings,
+  current_topic,
+  current_topic_articles,
+} from "@/Global";
 
 import { useRouter } from "vue-router";
+import MinxinModule from '@/Mixin.vue'
 
 export default defineComponent({
   name: "SideBarTocView",
 
-    methods: {
+  mixins:[MinxinModule
+  ],
+
+  methods: {
     scrollToSection(id: string) {
       let section = document.getElementById(id);
       if (section) {
-        section.scrollIntoView();
+        section.scrollIntoView({ behavior: "smooth" });
       }
-    },
+    }
   },
 
   setup() {
     const router = useRouter();
-    const article_name = router.currentRoute.value.params.id;
+    const article_name = computed(() => {
+      return router.currentRoute.value.params.id;
+    });
     const route_path = router.currentRoute.value.path;
 
-    //todo 移动到其他地方
-    //todo heading加载可以考虑改成document.querySelectorAll()
+    onMounted(() => {
+      window.addEventListener("scroll", () => {
+        let ele:any = document.querySelector(".sidebar-toc");
+        // if(!ele) return;
+        var wrapper = document.querySelector(".gkt-sidebar-wrapper");
+        var last = 0;
+        // ele.style.maxHeight = ((window.innerHeight || 798) - 200) + 'px'
 
-    
-    watch(article_context, (value) => {
-      let title_reg = '<(.+?)>';
-      let title_tag = value.match(title_reg)[1];
-      let heading_tag;
-      if (title_tag == 'h2') {
-        heading_tag = 'h3'
-      } else if (title_tag == 'h3') {
-        heading_tag = 'h4'
-      } else {
-        heading_tag = 'h2'
-      }
+        if (ele && wrapper) {
+          var scrollTop =
+            document.documentElement.scrollTop || document.body.scrollTop;
+          var isDown = scrollTop > last;
 
-      heading_tag = 'h3'
-      let res = value.matchAll('<' + heading_tag + '(.+?)</' + heading_tag + '>');
+                var x = 0,
+              y = 0;
+            while (ele) {
+              x += ele.offsetLeft - ele.scrollLeft + ele.clientLeft;
+              y += ele.offsetTop - ele.scrollTop + ele.clientTop;
+              ele = ele.offsetParent;
+            }
 
-      // res = Array.from(res) // iterator -> array
+          var pos =y - scrollTop;
+          var downLimit = 50;
+          var upLimit =-500;
+          // uarrow.style.marginTop = scrollTop + 'px';
+          isDown &&
+            pos <= downLimit &&
+            wrapper.classList.add("gkt-sidebar-fixed");
+          !isDown &&
+            pos > upLimit &&
+            wrapper.classList.remove("gkt-sidebar-fixed");
+          last = scrollTop;
+        }
 
-      let _headings = []
-      for (const iterator of res) {
-        let _value = iterator[1]
-        _headings.push(_value.slice(_value.indexOf('>') + 1))
-      }
-      current_article_headings.value = _headings
-    })
+        // let scrollTop =
+        //   document.documentElement.scrollTop ||
+        //   window.pageYOffset ||
+        //   document.body.scrollTop;
+        // if (scrollTop > 60) {
+        //   // 1
+        // } else {
+        //   // 2
+        // }
+      });
+    });
+
     return {
       current_article_headings,
       current_topic,
@@ -91,8 +132,12 @@ export default defineComponent({
   list-style-type: square;
 }
 
-.sidebar-toc a {
+.sidebar-toc ul > a {
   font-size: 16px;
+}
+
+.sidebar-toc ul ol > a {
+  font-size: 14px;
 }
 
 .sidebar-toc ul,
@@ -103,4 +148,18 @@ export default defineComponent({
 .sidebar-toc ul ol {
   list-style-type: circle;
 }
+
+.sidebar-toc-active {
+  font-weight: bold;
+  font-size: 14px !important;
+  color: #2b97ef !important;
+}
 </style>
+
+function getPosition(ele: any) {
+  throw new Error("Function not implemented.");
+}
+
+function aaa(): (this: Document, ev: Event) => any {
+  throw new Error("Function not implemented.");
+}
