@@ -12,8 +12,8 @@ const articles_group_by_label = ref()
 const articles_load_time =ref(0)
 const bucket_url = 'https://blog-resource-1257103956.cos.ap-nanjing.myqcloud.com/'
 
-const article_context = ref()
-
+const current_article_context = ref()
+const current_article_name = ref('')
 const current_article_headings = ref()
 const current_topic = ref();
 const current_topic_articles = ref()
@@ -105,9 +105,9 @@ watch(current_topic, (value) => {
     console.log(1111)
 })
 
-watch(article_context, (article_context_value) => {
+watch(current_article_context, (current_article_context_value) => {
     const title_reg = '<(.+?)>';
-    const title_tag = article_context_value.match(title_reg)[1];
+    const title_tag = current_article_context_value.match(title_reg)[1];
     let heading_tag;
     if (title_tag == 'h2') {
         heading_tag = 'h3'
@@ -118,7 +118,7 @@ watch(article_context, (article_context_value) => {
     }
 
     heading_tag = 'h3'
-    const res = article_context_value.matchAll('<' + heading_tag + '(.+?)</' + heading_tag + '>');
+    const res = current_article_context_value.matchAll('<' + heading_tag + '(.+?)</' + heading_tag + '>');
 
     // res = Array.from(res) // iterator -> array
 
@@ -143,9 +143,10 @@ export {
     
     articles_load_time,
     
-    article_context,
-
+    current_article_context,
+    
     current_article_headings,
+    current_article_name,
     current_topic,
     current_topic_articles,
 }

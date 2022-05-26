@@ -139,7 +139,7 @@ export default defineComponent({
 }
 
 .context-hover {
-  color: #2c3e50 !important;
+  color: #333333 !important;
 }
 
 .context-hover:hover {

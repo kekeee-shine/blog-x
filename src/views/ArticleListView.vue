@@ -121,7 +121,7 @@ export default defineComponent({
 
 .article-item a {
   font-size: 16px;
-  color: #2c3e50;
+  color: #333333;
 }
 
 .post-list {
