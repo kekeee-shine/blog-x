@@ -122,24 +122,24 @@ watch(current_article_context, (value) => {
     const title_tag = value.match(title_reg)[1];
     let heading_tag;
     if (title_tag == 'h2') {
-        heading_tag = 'h3'
+        heading_tag = 'h3';
     } else if (title_tag == 'h3') {
-        heading_tag = 'h4'
+        heading_tag = 'h4';
     } else {
-        heading_tag = 'h2'
+        heading_tag = 'h2';
     }
 
-    heading_tag = 'h3'
+    heading_tag = 'h3';
     const res = value.matchAll('<' + heading_tag + '(.+?)</' + heading_tag + '>');
 
     // res = Array.from(res) // iterator -> array
 
     const _headings = []
     for (const iterator of res) {
-        const _value = iterator[1]
-        _headings.push(_value.slice(_value.indexOf('>') + 1))
+        const _value = iterator[1];
+        _headings.push(_value.slice(_value.indexOf('>') + 1));
     }
-    current_article_headings.value = _headings
+    current_article_headings.value = _headings;
 })
 
 

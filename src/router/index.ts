@@ -1,4 +1,4 @@
-import { createRouter,createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import BasicLayout from '../layouts/BasicLayout.vue'
 const routes: Array<RouteRecordRaw> = [
   {
@@ -6,10 +6,10 @@ const routes: Array<RouteRecordRaw> = [
     name: 'home',
     component: BasicLayout,
     children: [
-      {path: '/article/:id', component: ()=>import('@/views/ArticleDetailView.vue')},
-      {path: '/archive', component: ()=>import('@/views/ArticleListView.vue')},
-      {path: '/label', component: ()=>import('@/views/ArticleListView.vue')},
-      {path: '/topic', component: ()=>import('@/views/ArticleListView.vue')}]
+      { path: '/article/:id', component: () => import('@/views/ArticleDetailView.vue') },
+      { path: '/archive', component: () => import('@/views/ArticleListView.vue') },
+      { path: '/label', component: () => import('@/views/ArticleListView.vue') },
+      { path: '/topic', component: () => import('@/views/ArticleListView.vue') }]
   }
 ]
 

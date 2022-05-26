@@ -15,6 +15,7 @@ import {
 
 import storage from "@/storage";
 
+import { watch } from "vue";
 import { useRouter } from "vue-router";
 
 export default {
@@ -47,6 +48,9 @@ export default {
       }
     }
 
+    watch(current_article_context, () => {
+      window.scroll(0, 0);
+    });
     return {
       current_article_context,
     };
