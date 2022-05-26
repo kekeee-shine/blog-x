@@ -4,12 +4,10 @@
 
 
 <script lang="ts">
-import { computed, onMounted, watch, ref, toRefs } from "vue";
 import axios from 'axios'
 import { bucket_url, articles, article_context, current_topic } from "@/Global";
-
 import { useRouter } from 'vue-router'
-const router = useRouter()
+
 export default {
   setup() {
     const router = useRouter()
@@ -35,7 +33,7 @@ export default {
 
           }
         })
-        .catch(function (error) {
+        .catch(function () {
           article_context.value = "loading failed";
         });
     }

@@ -2,7 +2,8 @@
   <main>
     <!-- <div class="markdown-body main-container"> -->
       <div class="post-container markdown-body float-left box-shadow">
-        <router-view :key="$route.fullPath"></router-view>
+        <ArticleListView v-if="is_home"></ArticleListView>
+        <router-view v-else :key="$route.fullPath"></router-view>
       </div>
 
       <aside class="gkt-sidebar float-left hidden-xs hidden-sm">
@@ -19,16 +20,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch, ref, computed } from "vue";
-import { articlesGroupByLabel } from "@/Global";
+import { defineComponent, computed } from "vue";
+import { articles_group_by_label } from "@/Global";
 import { useRouter } from "vue-router";
 
+
+import ArticleListView from '@/views/ArticleListView.vue'
 import SideBarLabelView from '@/views/sidebarViews/SideBarLabelView.vue'
 import SideBarTocView from '@/views/sidebarViews/SideBarTocView.vue'
 
 export default defineComponent({
   name: "MainPage",
   components: {
+    ArticleListView,
     SideBarLabelView,
     SideBarTocView
   },
@@ -36,7 +40,14 @@ export default defineComponent({
     const router = useRouter();
     const article_name = router.currentRoute.value.params.id;
 
-
+    const is_home = computed(()=>{
+      if(router.currentRoute.value.path=='/'){
+        return true;
+      }
+      else{
+        return false;
+      }
+    });
 
     const toc_mode = computed(()=>{
       if (router.currentRoute.value.path.startsWith('/article')){
@@ -48,11 +59,12 @@ export default defineComponent({
     });
 
     const label_items = computed(() => {
-      return articlesGroupByLabel.value
+      return articles_group_by_label.value
     })
 
     return {
       article_name,
+      is_home,
       label_items,
       toc_mode
     };

@@ -18,7 +18,12 @@
       <main-page class="col-xs-12 padding-0" />
     </div>
 
-    <img id="go-top" src="/icon/top.png" class="hidden-xs" onclick="javascript:window.scroll(0, 0)">
+    <img
+      id="go-top"
+      src="/icon/top.png"
+      class="hidden-xs"
+      onclick="javascript:window.scroll(0, 0)"
+    />
 
     <!-- layout footer -->
     <global-footer />
@@ -26,15 +31,7 @@
 </template>
 
 <script >
-import {
-  defineComponent,
-  ref,
-  computed,
-  watch,
-  created,
-  onMounted,
-  nextTick,
-} from "vue";
+import { defineComponent, ref } from "vue";
 import GlobalHeader from "@/components/GlobalHeader/index.vue";
 import GlobalFooter from "@/components/GlobalFooter/index.vue";
 import MainPage from "@/components/MainPage/index.vue";
@@ -210,12 +207,12 @@ h6 {
 }
 
 img#go-top {
-  display: block; 
+  display: block;
   right: 182.714px;
-      position: fixed;
-    bottom: 100px;
-    width: 50px;
-    cursor: pointer;
-    z-index: 9999;
+  position: fixed;
+  bottom: 100px;
+  width: 50px;
+  cursor: pointer;
+  z-index: 9999;
 }
 </style>

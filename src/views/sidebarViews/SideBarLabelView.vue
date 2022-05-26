@@ -10,8 +10,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch, ref, computed } from "vue";
-import { articles, labels, topics, articlesGroupByLabel } from "@/Global";
+import { defineComponent, computed } from "vue";
+import { articles, labels, topics, articles_group_by_label } from "@/Global";
 
 import { useRouter } from "vue-router";
 
@@ -31,7 +31,7 @@ export default defineComponent({
     const article_name = router.currentRoute.value.params.id;
 
     const label_items = computed(() => {
-      return articlesGroupByLabel.value;
+      return articles_group_by_label.value;
     });
 
     return {
@@ -52,7 +52,7 @@ export default defineComponent({
   overflow: hidden;
   text-overflow: ellipsis;
   color: #333;
-  background-color: #eaeaea;
+  background-color: #f6f6f6;
   border-radius: 15px;
   line-height: 30px;
   margin: 5px;

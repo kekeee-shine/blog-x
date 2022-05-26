@@ -1,10 +1,20 @@
 <template>
   <div class="post-list">
     <ul>
-      <li v-for="li_item in li_items" :key="li_item" :class="(li_item.is_group ? 'group-item group-color-'+li_item['color_index']%5 : 'article-item')"
+      <li
+        v-for="item in li_items"
+        :key="item"
+        :class="
+          item.is_group
+            ? 'group-item group-color-' + (item['color_index'] % 5)
+            : 'article-item'
+        "
       >
-        <router-link :class="li_item.is_group ? 'context-hover' : 'context-hover'"
-          :id="li_item.is_group ? 'group_' + li_item.title : ''" :to="li_item.path">{{ li_item.title }}
+        <router-link
+          :class="item.is_group ? 'context-hover' : 'context-hover'"
+          :id="item.is_group ? 'group_' + item.title : ''"
+          :to="item.path"
+          >{{ item.title }}
         </router-link>
       </li>
     </ul>
@@ -12,63 +22,81 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch, computed } from "vue";
-import { useRouter } from 'vue-router'
-import { articlesGroupByTime, articlesGroupByTopic, articlesGroupByLabel } from "@/Global";
+import { defineComponent, ref, watch } from "vue";
+import { useRouter } from "vue-router";
+import {
+  articles_group_by_time,
+  articles_group_by_topic,
+  articles_group_by_label,
+  articles_load_time,
+} from "@/Global";
 
 export default defineComponent({
   name: "ArticleListView",
   setup() {
-    const router = useRouter()
-    const route_path = router.currentRoute.value.path
-    const li_items = ref()
-    
-    let group_kind
-    let group_map = new Map()
-    if (route_path.startsWith('/archive')) {
-      group_kind = 'archive'
-      group_map = articlesGroupByTime.value;
-            console.log(1111)
-      console.log(JSON.stringify(group_map))
-    } else if (route_path.startsWith('/label')) {
-      group_kind = 'label'
-      group_map = articlesGroupByLabel.value
-    } else if (route_path.startsWith('/topic')) {
-      group_kind = 'topic'
-      group_map = articlesGroupByTopic.value
-    } else {
-      console.log('error list conditions')
-    }
+    const router = useRouter();
+    const route_path = router.currentRoute.value.path;
+    const items = ref();
 
-    let _li_items = [] as any
-    if (group_map) {
-    let _color_index = 0
-    for (let [group_key, group_value] of group_map.entries()) {
-      console.log("entries2", group_key, group_key);
-      _li_items.push({ title: group_key, path: '/' + group_kind + '/#group_' + group_key, is_group: true,color_index:_color_index })
-      for (let i = 0; i < group_value.length; i++) {
-        let article = group_value[i]
-        _li_items.push({ title: article['title'].length > 0 ? article['title']+article['create_time']: 'No Name'+article['create_time'], path: '/article/' + article['name'], is_group: false })
+    const f = function () {
+      let group_map = new Map();
+      let group_kind;
+      if (
+        route_path.startsWith("/archive") ||
+        route_path == "/" ||
+        route_path == ""
+      ) {
+        group_kind = "archive";
+        group_map = articles_group_by_time.value;
+      } else if (route_path.startsWith("/label")) {
+        group_kind = "label";
+
+        group_map = articles_group_by_label.value;
+      } else if (route_path.startsWith("/topic")) {
+        group_kind = "topic";
+        group_map = articles_group_by_topic.value;
+      } else {
+        console.log("error list conditions");
       }
 
-      _color_index++
-    }
-
+      let _items = [];
+      if (group_map) {
+        let _color_index = 0;
         for (let [group_key, group_value] of group_map.entries()) {
-      console.log("entries2", group_key, group_key);
-      _li_items.push({ title: group_key, path: '/' + group_kind + '/#group_' + group_key, is_group: true,color_index:_color_index })
-      for (let i = 0; i < group_value.length; i++) {
-        let article = group_value[i]
-        _li_items.push({ title: article['title'].length > 0 ? article['title']+article['create_time']: 'No Name'+article['create_time'], path: '/article/' + article['name'], is_group: false })
-      }
+          console.log("entries2", group_key, group_key);
+          _items.push({
+            title: group_key,
+            path: "/" + group_kind + "/#group_" + group_key,
+            is_group: true,
+            color_index: _color_index,
+          });
+          for (let i = 0; i < group_value.length; i++) {
+            let article = group_value[i];
+            _items.push({
+              title:
+                article["title"].length > 0
+                  ? article["title"] + article["create_time"]
+                  : "No Name" + article["create_time"],
+              path: "/article/" + article["name"],
+              is_group: false,
+            });
+          }
 
-      _color_index++
-    }
-    li_items.value = _li_items
-    }
+          _color_index++;
+        }
+        items.value = _items;
+      }
+    };
+
+    f();
+    
+    watch(articles_load_time, () => {
+      // let group_kind;
+      f();
+    });
 
     return {
-      li_items,
+      items,
     };
   },
 });
@@ -91,12 +119,11 @@ export default defineComponent({
 .article-item a {
   font-size: 16px;
   color: #2c3e50;
-
 }
 
 .post-list {
   line-height: 2.8em;
-  border-left: 4px solid #eaeaea;
+  border-left: 4px solid #f6f6f6;
 }
 
 .group-color-0:before {
@@ -114,5 +141,4 @@ export default defineComponent({
 .group-color-4:before {
   background: #880000 !important;
 }
-
 </style>

@@ -3,15 +3,25 @@
     <strong>{{ current_topic }}</strong>
     <ul>
       <li v-for="article in current_topic_articles" :key="article">
-        <router-link class="context-hover" :class="article['name'] == article_name ? 'sidebar-toc-active' : ''"
-          :to="'/article/' + article['name']">
+        <router-link
+          class="context-hover"
+          :class="article['name'] == article_name ? 'sidebar-toc-active' : ''"
+          :to="'/article/' + article['name']"
+        >
           <span>{{
-              article["title"].length > 0 ? article["title"] : "No Name"
+            article["title"].length > 0 ? article["title"] : "No Name"
           }}</span>
         </router-link>
         <ol v-if="article['name'] == article_name">
-          <li v-for="heading_item in current_article_headings" :key="heading_item">
-            <router-link class="context-hover" :to="'#' + heading_item" @click="scrollToSection(heading_item)">
+          <li
+            v-for="heading_item in current_article_headings"
+            :key="heading_item"
+          >
+            <router-link
+              class="context-hover"
+              :to="'#' + heading_item"
+              @click="scrollToSection(heading_item)"
+            >
               <span>{{ heading_item }}</span>
             </router-link>
           </li>
@@ -22,22 +32,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, onMounted } from "vue";
+import { defineComponent, computed } from "vue";
 import {
-  articlesGroupByTopic,
+  articles_group_by_topic,
   current_article_headings,
   current_topic,
   current_topic_articles,
 } from "@/Global";
 
 import { useRouter } from "vue-router";
-import MinxinModule from '@/Mixin.vue'
 
 export default defineComponent({
   name: "SideBarTocView",
-
-  mixins: [MinxinModule
-  ],
 
   methods: {
     scrollToSection(id: string) {
@@ -45,7 +51,7 @@ export default defineComponent({
       if (section) {
         section.scrollIntoView({ behavior: "smooth" });
       }
-    }
+    },
   },
 
   setup() {
@@ -53,8 +59,6 @@ export default defineComponent({
     const article_name = computed(() => {
       return router.currentRoute.value.params.id;
     });
-    const route_path = router.currentRoute.value.path;
-
     //todo 此处geektutu设计多很巧妙 必须在.gkt-sidebar-wrapper上有一个额外多section 在scroll 的时候才会完美平滑
     // onMounted(() => {
     //   window.addEventListener("scroll", () => {
@@ -110,7 +114,7 @@ export default defineComponent({
       current_topic,
       current_topic_articles,
       article_name,
-      articlesGroupByTopic,
+      articles_group_by_topic,
     };
   },
 });
@@ -126,11 +130,11 @@ export default defineComponent({
   list-style-type: square;
 }
 
-.sidebar-toc ul>a {
+.sidebar-toc ul > a {
   font-size: 16px;
 }
 
-.sidebar-toc ul ol>a {
+.sidebar-toc ul ol > a {
   font-size: 14px;
 }
 
@@ -149,11 +153,3 @@ export default defineComponent({
   color: #2b97ef !important;
 }
 </style>
-
-function getPosition(ele: any) {
-  throw new Error("Function not implemented.");
-}
-
-function aaa(): (this: Document, ev: Event) => any {
-  throw new Error("Function not implemented.");
-}

@@ -1,4 +1,3 @@
-
 import { ref } from "vue";
 import axios from 'axios'
 
@@ -6,9 +5,11 @@ import axios from 'axios'
 const labels = ref([]);
 const topics = ref([]);
 const articles = ref([]);
-const articlesGroupByTime = ref()
-const articlesGroupByTopic = ref()
-const articlesGroupByLabel = ref()
+const articles_group_by_time = ref()
+const articles_group_by_topic = ref()
+const articles_group_by_label = ref()
+
+const articles_load_time =ref(0)
 const bucket_url = 'https://blog-resource-1257103956.cos.ap-nanjing.myqcloud.com/'
 
 const article_context = ref()
@@ -38,7 +39,7 @@ axios
                 }
             }
         }
-        articlesGroupByLabel.value = label_map
+        articles_group_by_label.value = label_map
 
         const topic_map: Map<string, []> = new Map();
         for (let i = 0; i < articles_values.length; i++) {
@@ -51,7 +52,7 @@ axios
                 topic_map.get(cur_topic)?.push(article)
             }
         }
-        articlesGroupByTopic.value = topic_map
+        articles_group_by_topic.value = topic_map
 
 
         const time_map: Map<string, []> = new Map();
@@ -69,8 +70,9 @@ axios
                 time_map.get(create_year)?.push(article)
             }
         }
-        articlesGroupByTime.value = time_map
-
+        articles_group_by_time.value = time_map
+        
+        articles_load_time.value=new Date().getTime()
     })
     .catch(function (error) {
         console.log(error);
@@ -99,7 +101,7 @@ axios.get(
 import { watch } from "vue";
 
 watch(current_topic, (value) => {
-    current_topic_articles.value = articlesGroupByTopic.value.get(value);
+    current_topic_articles.value = articles_group_by_topic.value.get(value);
     console.log(1111)
 })
 
@@ -135,10 +137,12 @@ export {
     articles,
     labels,
     topics,
-    articlesGroupByTime,
-    articlesGroupByTopic,
-    articlesGroupByLabel,
-
+    articles_group_by_time,
+    articles_group_by_topic,
+    articles_group_by_label,
+    
+    articles_load_time,
+    
     article_context,
 
     current_article_headings,
