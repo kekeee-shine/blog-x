@@ -10,14 +10,18 @@
             : 'article-item'
         "
       >
-        <router-link
+      <!-- <div >
+
+      </div > -->
+
+              <router-link
           :class="item.is_group ? 'context-hover' : 'context-hover'"
           :id="item.is_group ? 'group_' + item.title : ''"
           :to="item.path"
           >{{ item.title }}
         </router-link>
 
-        <span class="float-right" v-if="!item.is_group">{{item.date}}</span>
+        <span class="float-right hidden-xs" v-if="!item.is_group">{{item.date}}</span>
       </li>
     </ul>
   </div>
@@ -106,7 +110,7 @@ export default defineComponent({
 </script>
 
 
-<style >
+<style lang="less" scoped>
 @media (min-width: 1200px) {
   .main-container {
     width: 1000px !important;

@@ -108,8 +108,7 @@ export default defineComponent({
 }
 
 @media (min-width: 1200px) {
-  .header-container,
-  .main-container {
+  .header-container{
     width: 100%;
     max-width: 1150px;
   }
@@ -192,12 +191,18 @@ h6 {
 } */
 .header-container,
 .main-container {
+    min-width: 414px;
   margin-right: auto;
   margin-left: auto;
   /* padding-top: 20px;
   padding-bottom: 30px; */
   overflow: hidden;
 }
+
+
+/* .main-container {
+  min-width: 414px;
+} */
 
 .gkt-sidebar-fixed {
   position: fixed;

@@ -3,13 +3,18 @@
     <div class="header-container">
       <nav id="kk-header-nav" class="text-right">
         <a class="float-left" href="/">
-          <img class="float-left" style="width: 44px; height: 44px" src="../../assets/logo.png" alt="" />
-          <span>Kekeee</span>
+          <img
+            class="float-left"
+            style="width: 88px; height: 32px; margin:8px 0px 4px 0px"
+            src="../../assets/kekeee.png"
+            alt=""
+          />
+          <!-- <span>Kekeee</span> -->
         </a>
         <ul class="float-right">
           <li class="float-left" v-for="nav in navs" :key="nav">
             <router-link class="nav-hover" :to="nav.path">{{
-                nav.name
+              nav.name
             }}</router-link>
           </li>
         </ul>
@@ -18,12 +23,24 @@
     <div id="kk-category-nav" class="header-container hidden-xs">
       <nav class="text-right">
         <ul class="float-left">
-          <li class="float-left" v-for="category in categories" :key="category"
-            @mouseover="category.show = !category.show" @mouseout="category.show = !category.show">
+          <li
+            class="float-left"
+            v-for="category in categories"
+            :key="category"
+            @mouseover="category.show = !category.show"
+            @mouseout="category.show = !category.show"
+          >
             <a class="nav-hover">{{ category.name }} ▾</a>
             <ul class="sub-category-ul" v-show="category.show">
-              <li v-for="subCategory in category.subCategory" class="sub-category-li" :key="subCategory">
-                <router-link class="sub-category-item text-left" :to="subCategory.path">{{ subCategory.name }}
+              <li
+                v-for="subCategory in category.subCategory"
+                class="sub-category-li"
+                :key="subCategory"
+              >
+                <router-link
+                  class="sub-category-item text-left"
+                  :to="subCategory.path"
+                  >{{ subCategory.name }}
                 </router-link>
               </li>
             </ul>
@@ -52,19 +69,28 @@ export default defineComponent({
 
     const categories = ref([
       {
-        name: "大分栏1",
+        name: "Supercar",
         show: false,
         subCategory: [
-          { name: "小芬兰1-1", path: "/11" },
-          { name: "小芬兰1-2", path: "/12" },
+          { name: "法拉利LaFerrari", path: "" },
+          { name: "兰博基尼Reventon", path: "" },
+          { name: "迈凯轮P1", path: "" },
+          { name: "布加迪威龙", path: "" },
+          { name: "帕加尼Zonda", path: "" },
+          { name: "柯尼塞格Agera", path: "" },
+          { name: "保时捷918 Spyder", path: "" },
         ],
       },
       {
-        name: "大分栏2",
+        name: "JDM",
         show: false,
         subCategory: [
-          { name: "小芬兰2-1", path: "/21" },
-          { name: "小芬兰2-2", path: "/22" },
+          { name: "日产GT-R", path: "" },
+          { name: "丰田Supra", path: "" },
+          { name: "雷克萨斯RCF", path: "" },
+          { name: "讴歌NSX", path: "" },
+          { name: "RX-7", path: "" },
+          { name: "EVO", path: "" },
         ],
       },
     ]);
@@ -83,7 +109,7 @@ export default defineComponent({
   margin-bottom: 0;
 }
 
-#kk-header-nav>ul>li {
+#kk-header-nav > ul > li {
   display: inline-block;
 }
 
@@ -157,32 +183,22 @@ export default defineComponent({
   a {
     color: #b2bbbd;
     font-size: 18px;
+    font-weight: 600;
   }
 
   ul {
     margin: 0 !important;
     padding: 0 !important;
   }
+}
 
-  // 图标 站名
-  span {
-    color: #dddddd;
-    font-size: 20px;
-    height: 44px;
-    line-height: 44px;
-  }
+.header-container{
 
-  #kk-category-nav ul li {
-    font-family: "Microsoft YaHei", "Helvetica", "Meiryo UI", "Malgun Gothic",
-      "Segoe UI", "Trebuchet MS", "Monaco", "monospace", "Tahoma", "STXihei",
-      "华文细黑", "STHeiti", "Helvetica Neue", "Droid Sans",
-      "wenquanyi micro hei", "FreeSans", "Arimo", "Arial", "SimSun", "宋体",
-      "Heiti", "黑体", "sans-serif";
-  }
+  max-height: 44px;
 }
 .header {
   * {
-      z-index: 9999;
+    z-index: 9999;
   }
 }
 </style>

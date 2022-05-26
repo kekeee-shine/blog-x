@@ -59,12 +59,11 @@ export default {
 </script>
 
 
-<style scoped>
+<style>
 @media (min-width: 1200px) {
-  .header-container,
   .main-container {
-    width: 100%;
-    max-width: 1150px;
+    width: 100% !important;
+    max-width: 1150px !important;
   }
 }
 </style>
