@@ -3,25 +3,15 @@
     <strong>{{ current_topic }}</strong>
     <ul>
       <li v-for="article in current_topic_articles" :key="article">
-        <router-link
-          class="context-hover"
-          :class="article['name'] == article_name ? 'sidebar-toc-active' : ''"
-          :to="'/article/' + article['name']"
-        >
+        <router-link class="context-hover" :class="article['name'] == article_name ? 'sidebar-toc-active' : ''"
+          :to="'/article/' + article['name']">
           <span>{{
-            article["title"].length > 0 ? article["title"] : "No Name"
+              article["title"].length > 0 ? article["title"] : "No Name"
           }}</span>
         </router-link>
         <ol v-if="article['name'] == article_name">
-          <li
-            v-for="heading_item in current_article_headings"
-            :key="heading_item"
-          >
-            <router-link
-              class="context-hover"
-              :to="'#' + heading_item"
-              @click="scrollToSection(heading_item)"
-            >
+          <li v-for="heading_item in current_article_headings" :key="heading_item">
+            <router-link class="context-hover" :to="'#' + heading_item" @click="scrollToSection">
               <span>{{ heading_item }}</span>
             </router-link>
           </li>
@@ -46,11 +36,21 @@ export default defineComponent({
   name: "SideBarTocView",
 
   methods: {
-    scrollToSection(id: string) {
-      let section = document.getElementById(id);
+    scrollToSection(event: any) {
+
+
+      let section: any = document.getElementById(event.currentTarget.innerText);
+      var active_ol_items = event.currentTarget.parentElement.parentElement.querySelectorAll('.sidebar-toc-active')
+
       if (section) {
-        section.scrollIntoView({ behavior: "smooth" });
+        // section.scrollIntoView({ behavior: "smooth" });
+        section.scrollIntoView();
       }
+
+      for (const item of active_ol_items) {
+        (item as unknown as Element).classList.remove('sidebar-toc-active');
+      }
+      event.currentTarget.classList.add('sidebar-toc-active');
     },
   },
 
@@ -130,11 +130,11 @@ export default defineComponent({
   list-style-type: square;
 }
 
-.sidebar-toc ul > a {
+.sidebar-toc ul>a {
   font-size: 16px;
 }
 
-.sidebar-toc ul ol > a {
+.sidebar-toc ul ol>a {
   font-size: 14px;
 }
 

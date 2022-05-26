@@ -25,6 +25,11 @@
       onclick="javascript:window.scroll(0, 0)"
     />
 
+
+  <div id="click-img-container">
+      <img src="" alt="Big Image">
+  </div>
+
     <!-- layout footer -->
     <global-footer />
   </a-layout>

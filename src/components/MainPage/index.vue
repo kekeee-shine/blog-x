@@ -73,7 +73,9 @@ export default defineComponent({
 </script>
 
 
-<style scoped>
+<!-- <style scoped> -->
+
+<style>
 .main-container {
   margin-right: auto;
   margin-left: auto;
@@ -90,4 +92,27 @@ export default defineComponent({
   padding: 30px, 0px;
   background-color: #fff;
 }
+
+
+
+#click-img-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    text-align: center;
+    width: 100%;
+    display: none;
+    z-index: 9999;
+}
+
+#click-img-container img {
+    object-fit: contain;
+    background: #eaecef;
+    padding: 15px;
+    border-radius: 10px;
+    height: auto;
+    width: auto;
+    vertical-align: middle;
+}
+
 </style>
