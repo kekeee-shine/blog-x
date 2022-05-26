@@ -2,7 +2,7 @@
   <div class="post-list">
     <ul>
       <li
-        v-for="item in li_items"
+        v-for="item in items"
         :key="item"
         :class="
           item.is_group
@@ -16,6 +16,8 @@
           :to="item.path"
           >{{ item.title }}
         </router-link>
+
+        <span class="float-right" v-if="!item.is_group">{{item.date}}</span>
       </li>
     </ul>
   </div>
@@ -75,9 +77,10 @@ export default defineComponent({
             _items.push({
               title:
                 article["title"].length > 0
-                  ? article["title"] + article["create_time"]
-                  : "No Name" + article["create_time"],
+                  ? article["title"]
+                  : "No Name",
               path: "/article/" + article["name"],
+              date: article["create_time"].substring(0,10).replace('-',' '),
               is_group: false,
             });
           }

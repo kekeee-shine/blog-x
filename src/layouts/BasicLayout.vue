@@ -207,7 +207,7 @@ h6 {
 }
 
 img#go-top {
-  display: block;
+  display: none;
   right: 182.714px;
   position: fixed;
   bottom: 100px;
