@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import { articles_group_by_label } from "@/Global";
+import { articles_group_by_label } from "@/global";
 import { useRouter } from "vue-router";
 
 

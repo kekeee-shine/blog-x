@@ -38,7 +38,7 @@ import {
   current_article_headings,
   current_topic,
   current_topic_articles,
-} from "@/Global";
+} from "@/global";
 
 import { useRouter } from "vue-router";
 

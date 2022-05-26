@@ -9,7 +9,7 @@ const articles_group_by_time = ref()
 const articles_group_by_topic = ref()
 const articles_group_by_label = ref()
 
-const articles_load_time =ref(0)
+const articles_load_time = ref(0)
 const bucket_url = 'https://blog-resource-1257103956.cos.ap-nanjing.myqcloud.com/'
 
 const current_article_context = ref()
@@ -71,8 +71,8 @@ axios
             }
         }
         articles_group_by_time.value = time_map
-        
-        articles_load_time.value=new Date().getTime()
+
+        articles_load_time.value = new Date().getTime()
     })
     .catch(function (error) {
         console.log(error);
@@ -105,9 +105,21 @@ watch(current_topic, (value) => {
     console.log(1111)
 })
 
-watch(current_article_context, (current_article_context_value) => {
+watch(current_article_name, (value) => {
+    for (let i = 0; i < articles.value.length; i++) {
+        const _article = articles.value[i];
+        let _topic_name;
+        if (_article["name"] == value) {
+            _topic_name = _article["topic"];
+            current_topic.value = _topic_name;
+            // reverse()
+            break;
+        }
+    }
+})
+watch(current_article_context, (value) => {
     const title_reg = '<(.+?)>';
-    const title_tag = current_article_context_value.match(title_reg)[1];
+    const title_tag = value.match(title_reg)[1];
     let heading_tag;
     if (title_tag == 'h2') {
         heading_tag = 'h3'
@@ -118,7 +130,7 @@ watch(current_article_context, (current_article_context_value) => {
     }
 
     heading_tag = 'h3'
-    const res = current_article_context_value.matchAll('<' + heading_tag + '(.+?)</' + heading_tag + '>');
+    const res = value.matchAll('<' + heading_tag + '(.+?)</' + heading_tag + '>');
 
     // res = Array.from(res) // iterator -> array
 
@@ -140,11 +152,11 @@ export {
     articles_group_by_time,
     articles_group_by_topic,
     articles_group_by_label,
-    
+
     articles_load_time,
-    
+
     current_article_context,
-    
+
     current_article_headings,
     current_article_name,
     current_topic,

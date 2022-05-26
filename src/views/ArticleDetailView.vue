@@ -11,7 +11,9 @@ import {
   current_article_context,
   current_article_name,
   current_topic,
-} from "@/Global";
+} from "@/global";
+
+import storage from "@/storage";
 
 import { useRouter } from "vue-router";
 
@@ -19,7 +21,7 @@ export default {
   setup() {
     const router = useRouter();
 
-    const article_name:any = router.currentRoute.value.params.id;
+    const article_name: any = router.currentRoute.value.params.id;
 
     const article_url = bucket_url + "html/" + article_name + ".html";
 
@@ -28,26 +30,21 @@ export default {
       article_name.length > 0 &&
       article_name != current_article_name.value
     ) {
-      axios
-        .get(article_url)
-        .then(function (response) {
-          current_article_name.value = article_name;
-          current_article_context.value = response.data;
-          
-          for (let i = 0; i < articles.value.length; i++) {
-            let _article: any = articles.value[i];
-            let _topic_name;
-            if (_article["name"] == article_name) {
-              _topic_name = _article["topic"];
-              current_topic.value = _topic_name;
-              // reverse()
-              break;
-            }
-          }
-        })
-        .catch(function () {
-          current_article_context.value = "loading failed";
-        });
+      current_article_name.value = article_name;
+      let local_storage_data = storage.get_article(article_name);
+      if (local_storage_data) {
+        current_article_context.value = local_storage_data;
+      } else {
+        axios
+          .get(article_url)
+          .then(function (response) {
+            current_article_context.value = response.data;
+            storage.set_article(article_name, response.data, 1);
+          })
+          .catch(function () {
+            current_article_context.value = "loading failed";
+          });
+      }
     }
 
     return {

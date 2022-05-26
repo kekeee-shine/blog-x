@@ -31,7 +31,7 @@ import {
   articles_group_by_topic,
   articles_group_by_label,
   articles_load_time,
-} from "@/Global";
+} from "@/global";
 
 export default defineComponent({
   name: "ArticleListView",
