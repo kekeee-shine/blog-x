@@ -49,11 +49,15 @@ export default {
             console.log("load completed");
           });
       }
-    }
 
-    watch(current_article_context, () => {
-        window.scroll(0, 0);
-    });
+      onMounted(()=>{
+                window.scroll(0, 0);
+      })
+    }
+    
+    // watch(current_article_context, () => {
+    //     window.scroll(0, 0);
+    // });
     return {
       current_article_context,
     };
