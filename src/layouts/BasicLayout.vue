@@ -26,7 +26,7 @@
     />
 
 
-  <div id="click-img-container">
+  <div id="click-img-container" onclick="image_close_click(this)">
       <img src="" alt="Big Image">
   </div>
 
