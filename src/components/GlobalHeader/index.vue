@@ -5,7 +5,7 @@
         <a class="float-left" href="/">
           <img
             class="float-left"
-            style="width: 88px; height: 32px; margin:8px 0px 4px 0px"
+            style="width: 100px; height: 32px; margin: 8px 0px 4px 0px"
             src="../../assets/kekeee.png"
             alt=""
           />
@@ -20,8 +20,8 @@
         </ul>
       </nav>
     </div>
-    <div id="kk-category-nav" class="header-container hidden-xs">
-      <nav class="text-right">
+    <div class="header-container hidden-xs">
+      <nav id="kk-category-nav" class="text-right">
         <ul class="float-left">
           <li
             class="float-left"
@@ -105,7 +105,7 @@ export default defineComponent({
 <style lang="less">
 #kk-header-nav li {
   float: left;
-  padding: 10px 0;
+  padding: 10px 0px;
   margin-bottom: 0;
 }
 
@@ -122,6 +122,7 @@ export default defineComponent({
   font-size: 18px;
   color: #b2bbbd;
   fill: #b2bbbd;
+  font-weight: 600;
 }
 
 #kk-category-nav a {
@@ -129,8 +130,17 @@ export default defineComponent({
   padding: 0px 10px;
   height: 44px;
   line-height: 44px;
+  color: #b2bbbd;
+  fill: #b2bbbd;
 }
 
+#kk-category-nav ul a {
+  font-weight: 600;
+}
+
+#kk-category-nav ul ul a {
+  font-weight: 500;
+}
 .sub-category-ul {
   /*
   * 当position属性值设置为absolute时，则开启了元素的绝对定位
@@ -180,11 +190,11 @@ export default defineComponent({
   width: 100%;
   position: fixed;
 
-  a {
-    color: #b2bbbd;
-    font-size: 18px;
-    font-weight: 600;
-  }
+  // a {
+  //   color: #b2bbbd;
+  //   font-size: 18px;
+  //   font-weight: 600;
+  // }
 
   ul {
     margin: 0 !important;
@@ -192,8 +202,7 @@ export default defineComponent({
   }
 }
 
-.header-container{
-
+.header-container {
   max-height: 44px;
 }
 .header {
