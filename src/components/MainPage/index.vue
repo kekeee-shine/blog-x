@@ -1,7 +1,7 @@
 <template>
   <main>
     <!-- <div class="markdown-body main-container"> -->
-      <div class="post-container markdown-body float-left box-shadow">
+      <div class="post-container float-left box-shadow">
         <ArticleListView v-if="is_home"></ArticleListView>
         <router-view v-else :key="$route.fullPath"></router-view>
       </div>

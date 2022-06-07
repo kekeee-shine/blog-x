@@ -1,5 +1,7 @@
 <template>
-  <div v-html="current_article_context"></div>
+<div class="markdown-body">
+    <div  v-html="current_article_context"></div>
+</div>
 </template>
 
 

@@ -87,30 +87,7 @@ export default defineComponent({
     padding-top: 0px;
   }
 }
-@media (min-width: 768px) {
-  .header-container,
-  .main-container {
-    width: 750px;
-  }
-  .post-container {
-    padding: 10px 30px !important;
-  }
-  .post-container article {
-    padding: 0 !important;
-  }
-  .post-list {
-    margin-left: 30px;
-  }
-}
-@media (min-width: 992px) {
-  .header-container,
-  .main-container {
-    width: 990px;
-  }
-  .post-container {
-    width: calc(100% - 320px);
-  }
-}
+
 
 @media (min-width: 1200px) {
   .header-container{
