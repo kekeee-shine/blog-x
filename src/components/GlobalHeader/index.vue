@@ -2,11 +2,11 @@
   <header class="header">
     <div class="header-container">
       <nav id="kk-header-nav" class="text-right">
-        <a class="float-left" href="/">
+        <a class="float-left" href="">
           <img
             class="float-left"
             style="width: 40px; height: 40px; margin: 8px 0px 4px 0px"
-            src="/icon/Teach.png"
+            src="icon/Teach.png"
             alt=""
           />
           <!-- <span>Kekeee</span> -->

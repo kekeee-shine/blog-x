@@ -20,7 +20,7 @@
 
     <img
       id="go-top"
-      src="/icon/top.png"
+      src="icon/top.png"
       class="hidden-xs"
       onclick="javascript:window.scroll(0, 0)"
     />
