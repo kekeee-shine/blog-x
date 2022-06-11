@@ -5,8 +5,8 @@
         <a class="float-left" href="/">
           <img
             class="float-left"
-            style="width: 100px; height: 32px; margin: 8px 0px 4px 0px"
-            src="../../assets/kekeee.png"
+            style="width: 40px; height: 40px; margin: 8px 0px 4px 0px"
+            src="/icon/Teach.png"
             alt=""
           />
           <!-- <span>Kekeee</span> -->
@@ -62,25 +62,25 @@ export default defineComponent({
     const navs = [
       { name: "专题", path: "/topic" },
       { name: "归档", path: "/archive" },
-      { name: "待定", path: "/" },
+      { name: "感谢", path: "/article/thanks" },
       { name: "待定", path: "/" },
       { name: "待定", path: "/" },
     ];
 
     const categories = ref([
-      {
-        name: "Supercar",
-        show: false,
-        subCategory: [
-          // { name: "法拉利LaFerrari", path: "" },
-          // { name: "兰博基尼Reventon", path: "" },
-          // { name: "迈凯轮P1", path: "" },
-          // { name: "布加迪威龙", path: "" },
-          // { name: "帕加尼Zonda", path: "" },
-          // { name: "柯尼塞格Agera", path: "" },
-          // { name: "保时捷918 Spyder", path: "" },
-        ],
-      },
+      // {
+      //   name: "SuperCar",
+      //   show: false,
+      //   subCategory: [
+      //     // { name: "法拉利LaFerrari", path: "" },
+      //     // { name: "兰博基尼Reventon", path: "" },
+      //     // { name: "迈凯轮P1", path: "" },
+      //     // { name: "布加迪威龙", path: "" },
+      //     // { name: "帕加尼Zonda", path: "" },
+      //     // { name: "柯尼塞格Agera", path: "" },
+      //     // { name: "保时捷918 Spyder", path: "" },
+      //   ],
+      // },
       {
         name: "JDM",
         show: false,
