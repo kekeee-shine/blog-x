@@ -62,9 +62,9 @@ export default defineComponent({
     const navs = [
       { name: "专题", path: "/topic" },
       { name: "归档", path: "/archive" },
-      { name: "感谢", path: "/article/thanks" },
-      { name: "待定", path: "/" },
-      { name: "待定", path: "/" },
+      // { name: "感谢", path: "/article/thanks" },
+      // { name: "待定", path: "/" },
+      // { name: "待定", path: "/" },
     ];
 
     const categories = ref([
