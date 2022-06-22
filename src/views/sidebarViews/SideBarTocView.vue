@@ -6,7 +6,7 @@
         <router-link class="context-hover" :class="article['name'] == article_name ? 'sidebar-toc-active' : ''"
           :to="'/article/' + article['name']">
           <span>{{
-              article["title"].length > 0 ? article["title"] : "No Name"
+              article["toc_title"].length > 0 ? article["toc_title"] : "No Name"
           }}</span>
         </router-link>
         <ol v-if="article['name'] == article_name">

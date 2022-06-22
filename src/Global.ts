@@ -102,6 +102,10 @@ import { watch } from "vue";
 
 watch(current_topic, (value) => {
     current_topic_articles.value = articles_group_by_topic.value.get(value);
+    for (let i = 0; i < current_topic_articles.value.length; i++) {
+        const current_topic_article = current_topic_articles.value[i];
+        current_topic_article['toc_title']=current_topic_article["title"].split(' - ')[current_topic_article["title"].split(' - ').length-1] 
+    }
     console.log(1111)
 })
 
